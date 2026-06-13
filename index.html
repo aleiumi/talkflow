@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TalkFlow - 社交话题引导工具，帮助用户自然开启对话">
+  <title>TalkFlow - 社交话题引导</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <!-- 流动渐变背景 -->
+  <div class="bg-flow" aria-hidden="true"></div>
+
+  <header class="app-header">
+    <h1 class="app-title">TalkFlow</h1>
+    <p class="app-subtitle">让每一次对话都自然发生</p>
+  </header>
+
+  <main class="app-main">
+    <div class="container">
+      <!-- 筛选区 - 卡片 -->
+      <section class="filter-section card-elevated">
+        <div class="filter-group filter-scene">
+          <span class="filter-label">🎭 场景</span>
+          <div class="filter-buttons">
+            <button class="filter-btn" data-value="微信聊天">💬 微信聊天</button>
+            <button class="filter-btn" data-value="共进晚餐">🍽️ 共进晚餐</button>
+            <button class="filter-btn" data-value="漫步街头">🚶 漫步街头</button>
+            <button class="filter-btn" data-value="深夜电话">🌙 深夜电话</button>
+            <button class="filter-btn" data-value="排队等位">⏳ 排队等位</button>
+            <button class="filter-btn" data-value="居家宅着">🏠 居家宅着</button>
+            <button class="filter-btn" data-value="旅行户外">✈️ 旅行户外</button>
+            <button class="filter-btn filter-btn-any" data-value="">🎲 不限</button>
+          </div>
+        </div>
+        <div class="filter-group filter-relationship">
+          <span class="filter-label">💞 关系</span>
+          <div class="filter-buttons">
+            <button class="filter-btn" data-value="交换初见">👋 交换初见</button>
+            <button class="filter-btn" data-value="初次约会">💕 初次约会</button>
+            <button class="filter-btn" data-value="暧昧期">💗 暧昧期</button>
+            <button class="filter-btn" data-value="老夫老妻">💑 老夫老妻</button>
+            <button class="filter-btn" data-value="很久没见">🕰️ 很久没见</button>
+            <button class="filter-btn" data-value="闹矛盾破冰">🤝 闹矛盾破冰</button>
+            <button class="filter-btn" data-value="相亲局">💍 相亲局</button>
+            <button class="filter-btn filter-btn-any" data-value="">🎲 不限</button>
+          </div>
+        </div>
+        <div class="filter-group filter-mood">
+          <span class="filter-label">🎨 情绪</span>
+          <div class="filter-buttons">
+            <button class="filter-btn" data-value="幽默风趣">😄 幽默风趣</button>
+            <button class="filter-btn" data-value="治愈感性">🤗 治愈感性</button>
+            <button class="filter-btn" data-value="灵魂拷问">🤔 灵魂拷问</button>
+            <button class="filter-btn" data-value="奇思妙想">✨ 奇思妙想</button>
+            <button class="filter-btn" data-value="破冰尴尬">🧊 破冰尴尬</button>
+            <button class="filter-btn" data-value="夸夸赞美">👏 夸夸赞美</button>
+            <button class="filter-btn" data-value="正经避雷">⚠️ 正经避雷</button>
+            <button class="filter-btn filter-btn-any" data-value="">🎲 不限</button>
+          </div>
+        </div>
+        <div class="filter-bar">
+          <span class="filter-count"><span id="topic-count">45</span> 个话题可选</span>
+          <button class="filter-reset">↻ 重置</button>
+        </div>
+      </section>
+
+      <!-- 抽取大按钮 -->
+      <section class="draw-section">
+        <button class="draw-btn" id="drawBtn">
+          <span class="draw-btn-icon">🎁</span>
+          <span class="draw-btn-text">抽取话题盲盒</span>
+          <span class="draw-btn-hint">点击开启新话题</span>
+        </button>
+      </section>
+
+      <!-- 结果展示区 -->
+      <div class="blindbox-result hidden card-elevated" id="resultArea">
+        <div class="result-badge">
+          <span class="result-scene-tag tag" id="resultScene"></span>
+          <span class="result-rel-tag tag" id="resultRelationship"></span>
+          <span class="result-mood-tag tag" id="resultMood"></span>
+        </div>
+        <h3 class="result-topic-title" id="resultTitle"></h3>
+        <div class="result-actions">
+          <button class="result-btn result-btn-guide" id="guideBtn">📖 查看话术引导</button>
+          <button class="result-btn result-btn-switch" id="switchBtn">🔄 换一个</button>
+          <button class="result-btn result-btn-copy" id="copyBtn">📋 复制话题</button>
+        </div>
+      </div>
+
+      <!-- 话术引导 -->
+      <section class="guide-card-section hidden" id="guideSection">
+        <h2 class="section-title">📖 话术 + 思维双引导</h2>
+        <div class="guide-cards" id="guideCards"></div>
+      </section>
+
+      <!-- 话题实验室 -->
+      <section class="lab-section hidden" id="labSection">
+        <h2 class="section-title">🧪 话题实验室</h2>
+        <div class="lab-form card-elevated">
+          <div class="lab-msg hidden" id="labMsg"></div>
+          <input type="text" class="lab-topic-input" id="labTopicInput" placeholder="输入你的话题...">
+          <textarea class="lab-opening-input" id="labOpeningInput" placeholder="推荐开场白..." rows="2"></textarea>
+          <div class="lab-selects">
+            <select class="lab-scene-select" id="labSceneSelect">
+              <option value="">🎭 选择场景</option>
+              <option value="微信聊天">微信聊天</option>
+              <option value="共进晚餐">共进晚餐</option>
+              <option value="漫步街头">漫步街头</option>
+              <option value="深夜电话">深夜电话</option>
+              <option value="排队等位">排队等位</option>
+              <option value="居家宅着">居家宅着</option>
+              <option value="旅行户外">旅行户外</option>
+            </select>
+            <select class="lab-relationship-select" id="labRelationshipSelect">
+              <option value="">💞 选择关系</option>
+              <option value="交换初见">交换初见</option>
+              <option value="初次约会">初次约会</option>
+              <option value="暧昧期">暧昧期</option>
+              <option value="老夫老妻">老夫老妻</option>
+              <option value="很久没见">很久没见</option>
+              <option value="闹矛盾破冰">闹矛盾破冰</option>
+              <option value="相亲局">相亲局</option>
+            </select>
+            <select class="lab-mood-select" id="labMoodSelect">
+              <option value="">🎨 选择情绪</option>
+              <option value="幽默风趣">幽默风趣</option>
+              <option value="治愈感性">治愈感性</option>
+              <option value="灵魂拷问">灵魂拷问</option>
+              <option value="奇思妙想">奇思妙想</option>
+              <option value="破冰尴尬">破冰尴尬</option>
+              <option value="夸夸赞美">夸夸赞美</option>
+              <option value="正经避雷">正经避雷</option>
+            </select>
+          </div>
+          <button class="lab-submit-btn" id="labSubmitBtn">✨ 提交话题</button>
+        </div>
+        <hr class="divider">
+        <div class="rank-list">
+          <div class="rank-red card-elevated-sm">
+            <div class="rank-label">🔥 必杀技</div>
+            <div class="rank-red-list" id="rankRedList"></div>
+          </div>
+          <div class="rank-black card-elevated-sm">
+            <div class="rank-label">💨 冷场王</div>
+            <div class="rank-black-list" id="rankBlackList"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="app-footer-nav">
+      <a href="#" class="nav-blindbox" data-nav="blindbox">🎁 话题盲盒</a>
+      <a href="#" class="nav-lab" data-nav="lab">🧪 话题实验室</a>
+    </div>
+    <p>&copy; 2026 TalkFlow</p>
+  </footer>
+
+  <!-- 救急模式 -->
+  <button class="panic-button" id="panicBtn" title="救急模式">
+    <span class="panic-icon">🆘</span>
+  </button>
+
+  <div class="panic-panel hidden" id="panicPanel">
+    <div class="panic-header">
+      <h3>🆘 救急模式</h3>
+      <button class="panic-close" id="panicClose">&#10005;</button>
+    </div>
+    <div class="panic-content">
+      <p class="panic-topic" id="panicTopic"></p>
+      <p class="panic-opening" id="panicOpening"></p>
+      <button class="panic-new-btn" id="panicNewBtn">🔄 换一个</button>
+    </div>
+  </div>
+
+  <script defer src="js/main.js"></script>
+</body>
+</html>

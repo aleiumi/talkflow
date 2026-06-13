@@ -1,0 +1,330 @@
+﻿/* ========================================
+   TalkFlow - 主样式文件 v2
+   强化视觉层次 + 流动渐变背景 + 卡片式布局
+   ======================================== */
+
+/* ---------- CSS 变量 ---------- */
+:root {
+  /* 色彩 */
+  --color-primary: #5a8f6a;
+  --color-primary-light: #7db389;
+  --color-primary-dark: #3d6b4c;
+  --color-accent: #e8a87c;
+  --color-accent-light: #f5d4bc;
+  --color-bg: #f6f4f0;
+  --color-surface: #ffffff;
+  --color-text: #2d2d2d;
+  --color-text-secondary: #6b6b6b;
+  --color-text-muted: #9a9a9a;
+  --color-border: #e8e4df;
+  --color-shadow: rgba(0, 0, 0, 0.06);
+  --color-shadow-strong: rgba(0, 0, 0, 0.10);
+
+  /* 字体 */
+  --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-serif: "Noto Serif SC", "PingFang SC", serif;
+
+  /* 字号 */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.35rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+
+  /* 间距 */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* 圆角 */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px var(--color-shadow);
+  --shadow-md: 0 4px 16px var(--color-shadow);
+  --shadow-lg: 0 8px 32px var(--color-shadow-strong);
+}
+
+/* ---------- 全局重置 ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ---------- 流动渐变背景 ---------- */
+.bg-flow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(90, 143, 106, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(232, 168, 124, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(90, 143, 106, 0.05) 0%, transparent 50%);
+  animation: bgFlow 12s ease-in-out infinite alternate;
+}
+
+@keyframes bgFlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* ---------- 按钮重置 ---------- */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* ---------- 卡片 ---------- */
+.card-elevated {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-lg);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.card-elevated-sm {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: #fff;
+  padding: var(--space-2xl) var(--space-lg) var(--space-xl);
+  text-align: center;
+  overflow: hidden;
+}
+
+.app-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: var(--color-bg);
+  border-radius: 30px 30px 0 0;
+}
+
+.app-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.app-subtitle {
+  font-size: var(--text-sm);
+  opacity: 0.85;
+  margin-top: var(--space-xs);
+  font-weight: 400;
+}
+
+/* ---------- Main ---------- */
+.app-main {
+  flex: 1;
+  padding: var(--space-lg) var(--space-md) var(--space-2xl);
+  margin-top: -8px;
+}
+
+.container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ---------- 隐藏工具类 ---------- */
+.hidden {
+  display: none !important;
+}
+
+/* ---------- 分隔线 ---------- */
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  border: none;
+  margin: var(--space-md) 0;
+}
+
+/* ---------- 标签 ---------- */
+.tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  padding: 2px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+/* ---------- Footer ---------- */
+.app-footer {
+  text-align: center;
+  padding: var(--space-lg) var(--space-md);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+.app-footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.app-footer-nav a {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: all 200ms ease;
+}
+
+.app-footer-nav a:hover {
+  color: var(--color-primary);
+  background: rgba(90, 143, 106, 0.08);
+}
+
+/* ---------- 响应式 ---------- */
+
+/* ====== 手机端专项优化 ====== */
+
+/* 更好的触控反馈 */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 安全区域适配 */
+.app-header,
+.app-main,
+.app-footer {
+  padding-left: max(var(--space-md), env(safe-area-inset-left));
+  padding-right: max(var(--space-md), env(safe-area-inset-right));
+}
+
+/* 手机小屏适配 */
+@media (max-width: 399px) {
+  :root {
+    --space-lg: 1rem;
+    --space-xl: 1.25rem;
+    --text-sm: 0.75rem;
+    --text-base: 0.875rem;
+    --text-lg: 1rem;
+    --text-xl: 1.15rem;
+    --text-2xl: 1.4rem;
+  }
+
+  .app-header {
+    padding: var(--space-xl) var(--space-md) var(--space-lg);
+  }
+
+  .app-title {
+    font-size: var(--text-2xl);
+  }
+
+  .app-main {
+    padding: var(--space-md);
+  }
+
+  .card-elevated {
+    padding: var(--space-md);
+  }
+}
+
+/* 400-599px 中等手机 */
+@media (min-width: 400px) and (max-width: 599px) {
+  :root {
+    --space-lg: 1.25rem;
+    --space-xl: 1.5rem;
+  }
+
+  .app-header {
+    padding: var(--space-xl) var(--space-md) var(--space-lg);
+  }
+
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .app-main {
+    padding: var(--space-md);
+  }
+}
+
+@media (min-width: 600px) {
+  .app-header {
+    padding: var(--space-2xl) var(--space-xl) var(--space-xl);
+  }
+
+  .app-title {
+    font-size: 2.5rem;
+  }
+
+  .app-main {
+    padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+  }
+
+  .container {
+    gap: var(--space-xl);
+  }
+}
+
+@media (min-width: 960px) {
+  .app-title {
+    font-size: 3rem;
+  }
+}
