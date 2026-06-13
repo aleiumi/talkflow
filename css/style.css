@@ -241,6 +241,61 @@ a:hover {
 
 /* ---------- 响应式 ---------- */
 
+
+/* ====== 手机端适配 ====== */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* < 400px 小屏手机 */
+@media (max-width: 399px) {
+  :root {
+    --space-md: 10px;
+    --space-lg: 14px;
+    --space-xl: 18px;
+    --text-xs: 11px;
+    --text-sm: 12px;
+    --text-base: 14px;
+    --text-lg: 15px;
+    --text-xl: 17px;
+    --text-2xl: 20px;
+    --text-3xl: 24px;
+  }
+  .app-header { padding: 16px 12px 14px; }
+  .app-header::after { height: 20px; border-radius: 20px 20px 0 0; }
+  .app-title { font-size: var(--text-2xl); }
+  .app-subtitle { font-size: 11px; }
+  .app-main { padding: 8px 10px 16px; }
+  .container { gap: 10px; }
+  .card-elevated { padding: 12px; }
+  .filter-section { gap: 12px; }
+  .filter-btn { padding: 6px 10px; font-size: 11px; min-height: 32px; }
+  .filter-buttons { gap: 5px; }
+  .draw-btn { padding: 14px 12px; border-radius: 16px; max-width: 100%; }
+  .draw-btn-icon { font-size: 24px; }
+  .draw-btn-text { font-size: 15px; }
+  .blindbox-result { padding: 12px; }
+  .result-topic-title { font-size: var(--text-lg); line-height: 1.6; }
+  .result-actions { flex-direction: column; gap: 6px; }
+  .result-btn { width: 100%; justify-content: center; padding: 10px; min-height: 40px; font-size: 13px; }
+  .panic-panel { width: calc(100vw - 24px); right: 12px; bottom: 64px; }
+  .panic-button { width: 42px; height: 42px; bottom: 16px; right: 16px; }
+  .lab-selects { flex-direction: column; }
+  .lab-selects select { width: 100%; min-height: 40px; }
+  .rank-list { flex-direction: column; gap: 8px; }
+}
+
+/* 400-599px */
+@media (min-width: 400px) and (max-width: 599px) {
+  .filter-btn { padding: 8px 12px; font-size: 12px; min-height: 36px; }
+  .draw-btn { padding: 18px 14px; max-width: 100%; border-radius: 18px; }
+  .result-btn { min-height: 42px; }
+  .panic-panel { width: calc(100vw - 32px); right: 16px; }
+  .lab-selects { flex-direction: column; }
+  .lab-selects select { width: 100%; }
+  .rank-list { flex-direction: column; }
+}
+
 @media (min-width: 600px) {
   .app-header {
     padding: var(--space-2xl) var(--space-xl) var(--space-xl);
